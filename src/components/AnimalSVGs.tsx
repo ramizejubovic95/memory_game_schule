@@ -248,17 +248,61 @@ export const animalComponents: Record<string, React.FC<SVGProps>> = {
   beetle: Beetle,
 };
 
-export const animalNames: Record<string, string> = {
-  ladybug: "Marienkäfer",
-  bird: "Vogel",
-  butterfly: "Schmetterling",
-  bee: "Biene",
-  rabbit: "Hase",
-  snail: "Schnecke",
-  hedgehog: "Igel",
-  frog: "Frosch",
-  spider: "Spinne",
-  mouse: "Maus",
-  caterpillar: "Raupe",
-  beetle: "Käfer",
+export type Lang = "de" | "en";
+
+interface Translations {
+  animals: Record<string, string>;
+  subtitle: string;
+  moves: string;
+  newGame: string;
+  congrats: string;
+  foundAll: string;
+  playAgain: string;
+}
+
+export const translations: Record<Lang, Translations> = {
+  de: {
+    animals: {
+      ladybug: "Marienkäfer",
+      bird: "Vogel",
+      butterfly: "Schmetterling",
+      bee: "Biene",
+      rabbit: "Hase",
+      snail: "Schnecke",
+      hedgehog: "Igel",
+      frog: "Frosch",
+      spider: "Spinne",
+      mouse: "Maus",
+      caterpillar: "Raupe",
+      beetle: "Käfer",
+    },
+    subtitle: "Finde alle passenden Paare!",
+    moves: "Züge",
+    newGame: "Neues Spiel",
+    congrats: "Glückwunsch!",
+    foundAll: "Du hast alle Paare gefunden!",
+    playAgain: "Nochmal spielen",
+  },
+  en: {
+    animals: {
+      ladybug: "Ladybug",
+      bird: "Bird",
+      butterfly: "Butterfly",
+      bee: "Bee",
+      rabbit: "Rabbit",
+      snail: "Snail",
+      hedgehog: "Hedgehog",
+      frog: "Frog",
+      spider: "Spider",
+      mouse: "Mouse",
+      caterpillar: "Caterpillar",
+      beetle: "Beetle",
+    },
+    subtitle: "Find all the matching pairs!",
+    moves: "moves",
+    newGame: "New Game",
+    congrats: "Congratulations!",
+    foundAll: "You found all the pairs!",
+    playAgain: "Play Again",
+  },
 };

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import { animalComponents, animalNames } from "./AnimalSVGs";
+import { animalComponents, translations, Lang } from "./AnimalSVGs";
 
 interface Card {
   id: number;
@@ -74,8 +74,10 @@ export default function MemoryGame() {
   const [timer, setTimer] = useState(0);
   const [gameStarted, setGameStarted] = useState(false);
   const [isChecking, setIsChecking] = useState(false);
+  const [lang, setLang] = useState<Lang>("de");
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const totalPairs = Object.keys(animalComponents).length;
+  const t = translations[lang];
 
   const startNewGame = useCallback(() => {
     setCards(createCards());
@@ -201,7 +203,7 @@ export default function MemoryGame() {
               <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
               </svg>
-              <span className="text-green-800">{moves} Züge</span>
+              <span className="text-green-800">{moves} {t.moves}</span>
             </div>
             <div className="flex items-center gap-2 bg-white/70 rounded-full px-3 py-1.5 shadow-sm">
               <svg className="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 24 24">
@@ -211,12 +213,20 @@ export default function MemoryGame() {
             </div>
           </div>
 
-          <button
-            onClick={startNewGame}
-            className="bg-green-600 hover:bg-green-700 text-white font-semibold px-5 py-1.5 rounded-full shadow-md hover:shadow-lg transition-all active:scale-95 text-sm"
-          >
-            Neues Spiel
-          </button>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setLang(lang === "de" ? "en" : "de")}
+              className="flex items-center gap-1.5 bg-white/70 rounded-full px-3 py-1.5 shadow-sm text-sm font-medium text-green-800 hover:bg-white/90 transition-colors"
+            >
+              {lang === "de" ? "EN" : "DE"}
+            </button>
+            <button
+              onClick={startNewGame}
+              className="bg-green-600 hover:bg-green-700 text-white font-semibold px-5 py-1.5 rounded-full shadow-md hover:shadow-lg transition-all active:scale-95 text-sm"
+            >
+              {t.newGame}
+            </button>
+          </div>
         </div>
       </header>
 
@@ -246,7 +256,7 @@ export default function MemoryGame() {
                   >
                     <AnimalComponent className="w-full h-3/4" />
                     <span className="text-xs font-medium text-green-700 mt-1 leading-tight">
-                      {animalNames[card.animal]}
+                      {t.animals[card.animal]}
                     </span>
                   </div>
 
@@ -287,18 +297,18 @@ export default function MemoryGame() {
               ))}
             </div>
             <h2 className="text-3xl font-bold text-green-800 mb-2">
-              Glückwunsch!
+              {t.congrats}
             </h2>
-            <p className="text-green-600 mb-4">Du hast alle Paare gefunden!</p>
+            <p className="text-green-600 mb-4">{t.foundAll}</p>
             <div className="flex justify-center gap-4 text-sm text-green-700 mb-6">
               <span className="bg-green-50 px-3 py-1 rounded-full">{formatTime(timer)}</span>
-              <span className="bg-green-50 px-3 py-1 rounded-full">{moves} Züge</span>
+              <span className="bg-green-50 px-3 py-1 rounded-full">{moves} {t.moves}</span>
             </div>
             <button
               onClick={startNewGame}
               className="bg-green-600 hover:bg-green-700 text-white font-semibold px-8 py-3 rounded-full shadow-md hover:shadow-lg transition-all active:scale-95"
             >
-              Nochmal spielen
+              {t.playAgain}
             </button>
           </div>
         </div>
